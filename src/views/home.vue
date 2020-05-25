@@ -1,71 +1,48 @@
 <template>
   <div id="content">
-    <el-container>
-        <el-aside width="200px">
-            <ul>
-                <router-link to="/right"><li v-for="(v,i) in leftList" :key="i">{{v.name}}</li></router-link>
-            </ul>
-        </el-aside>
-    <router-view/>
-    </el-container>
+    <ul class="tab_tit">
+      <li v-for="(item,index) in lists" :key="index" :class="n==index?'active':''" @click="n=index">{{item.title}}</li>
+    </ul>
+    <div class="tab_con">
+      <div v-for="(v,i) in lists" :key="i" v-show="n==i">
+        {{v.con}}
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
-    name:'home',
-    data(){
-        return {
-            leftList:[{
-                name:'首页'            
-            },{
-                name:'服装'            
-            },{
-                name:'生鲜'            
-            },{
-                name:'电器'            
-            }]
-        }
+  name:'home',
+  data(){
+    return {
+      n:0,
+      lists:[
+        {title:'首页',con:'内容1'},
+        {title:'新闻',con:'内容2'},
+        {title:'关于我们',con:'内容3'},
+        {title:'联系',con:'内容4'},
+      ]
     }
+  }
 }
 </script>
 <style>
-ul{
-    margin: 0;
-    padding: 0;
+ul,li{
+  padding: 0;
+  margin: 0;
 }
-ul>li{
-    list-style: none;
-    background-color:skyblue;
-    border-bottom: 1px solid sienna;
-    width: 100%;
+.tab_tit li{
+  padding: 10px 15px;
+  text-align: center;
+  list-style: none;
+  cursor: pointer;
+  display: inline-block;
 }
-ul>li:hover{
-    cursor: pointer;
+.tab_tit .active{
+  color: #09f;
+  border-bottom: 1px solid #09f;
 }
-  .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
-    text-align: center;
-    line-height: 50px;
-  }
-  
-  .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    line-height: 160px;
-  }
-  
-  body > .el-container {
-    margin-bottom: 40px;
-  }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
-  }
+.tab_con div{
+  margin:30px
+}
 </style>
