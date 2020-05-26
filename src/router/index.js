@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/home.vue';
 
 Vue.use(VueRouter);
 
@@ -8,12 +7,16 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: (resolve) => require(['@/views/home'], resolve),
   },{
-    name: 'right',
-    path: '/right',
-    component: (resolve) => require(['@/views/right'], resolve),
-},
+    name: 'child',
+    path: '/child',
+    component: (resolve) => require(['@/views/child'], resolve),
+  },{
+    name: 'childDate',
+    path: '/childDate',
+    component: (resolve) => require(['@/views/childDate'], resolve),
+  },
 ];
 
 const router = new VueRouter({
